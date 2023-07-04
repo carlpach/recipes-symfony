@@ -4,6 +4,9 @@
 {% block contenido %}
 <div class="container">
 <h2>Listado de Pokemons </h2>
+    {% for message in app.flashes("success") %} {# flash message, appears only when adding new #}
+        <p>{{ message }}</p>
+        {% endfor %}
     <div class="row row-cols-1 row-cols-md-2">
         {% for recipe in listRecipes %}  {# bucle for in #}
             <div class="col mb-4">

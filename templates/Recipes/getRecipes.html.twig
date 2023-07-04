@@ -16,7 +16,9 @@
             </div>
             <div class="row">
                 <ul>
-                    {# DEBILIDADES #}
+                    {% for ingredient in recipe.ingredients %}
+                        <li> {{ ingredient.name }} </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
