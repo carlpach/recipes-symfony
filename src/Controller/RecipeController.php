@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RecipeController extends AbstractController {
 
-    #[Route("/recipe")]
+    #[Route("/recipe", name:"getPokemon")]
     public function getRecipe() {
         $recipe = [
             "code" => "466hf5",
@@ -21,7 +21,7 @@ class RecipeController extends AbstractController {
         return $this->render("Recipes/getRecipes.html.twig", ["recipe" => $recipe] );
     }
 
-    #[Route("/recipes")]
+    #[Route("/recipes", name:"listRecipes")]
     public function getRecipes() {
         $listRecipes = [
             [
@@ -47,6 +47,6 @@ class RecipeController extends AbstractController {
             ],
         ];
 
-        return $this->render("Recipes/listRecipes.html.twig", ["listRecipes" => "$listRecipes"] )
+        return $this->render("Recipes/listRecipes.html.twig", ["listRecipes" => $listRecipes] );
     }
 }
