@@ -1,0 +1,22 @@
+
+{% extends "Recipes/baseRecipes.html.twig" %}
+
+{% block contenido %}
+<div class="container">
+<h2>Listado de Pokemons </h2>
+    <div class="row row-cols-1 row-cols-md-2">
+        {% for recipe in listRecipes %}  {# bucle for in #}
+            <div class="col mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img src={{ recipe.image }} class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ recipe.name }}</h5>
+                        <p class="card-text">{{ recipe.ingredients }}</p>
+                        <a href="#" class="btn btn-primary">Más Info</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %} {# cierrre del bucle for in #}
+    </div>
+{% endblock %}
+
