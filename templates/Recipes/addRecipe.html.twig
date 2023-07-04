@@ -1,7 +1,6 @@
 {% extends "Recipes/baseRecipes.html.twig" %}
 
-            {% block contenido %} {% endblock %}
-            {% block js %} {% endblock %}
-        </div>
-    </body>
-</html>
+    {% block contenido %} 
+    {{ form(recipeForm) }}
+    {% endblock %}
+    {% block js %} {% endblock %}

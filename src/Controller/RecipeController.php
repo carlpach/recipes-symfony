@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Ingredient;
 use App\Entity\Recipe;
+use App\Form\RecipeFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,7 +82,7 @@ class RecipeController extends AbstractController {
     #[Route("/newRecipe", name: "newRecipe")]
     public function newRecipe(Request $request, EntityManagerInterface $doctrine) {
         // form we want to use
-        $form = $this->createForm(recipeFormType::class);
+        $form = $this->createForm(RecipeFormType::class);
         $form->handleRequest($request);
 
         // si han ellegado los datos y el formulario es valido:
@@ -97,7 +98,7 @@ class RecipeController extends AbstractController {
             return $this->redirectToRoute("listaRecipe");
         }
 
-        return $this->render("Recipes/addRecipe.html.twig", ["recipeForm"->$form]);
+        return $this->render("Recipes/addRecipe.html.twig", ["recipeForm"=>$form]);
     }
 
 
@@ -110,7 +111,7 @@ class RecipeController extends AbstractController {
         $recipe = $repo->find($id);
         
         // form we want to use
-        $form = $this->createForm(recipeFormType::class, $recipe);
+        $form = $this->createForm(RecipeFormType::class, $recipe);
         $form->handleRequest($request);
 
         // si han llegado los datos y el formulario es valido:
@@ -127,7 +128,7 @@ class RecipeController extends AbstractController {
 
         }
 
-        return $this->render("Recipes/addRecipe.html.twig", ["recipeForm"->$form]);
+        return $this->render("Recipes/addRecipe.html.twig", ["recipeForm"=>$form]);
     }
 
     #[Route("/remove/{id)", name:"removeRecipe")]
