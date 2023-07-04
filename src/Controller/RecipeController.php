@@ -95,9 +95,55 @@ class RecipeController extends AbstractController {
 
             // after adding new recipe go to:
             return $this->redirectToRoute("listaRecipe");
+        }
+
+        return $this->render("Recipes/addRecipe.html.twig", ["recipeForm"->$form]);
+    }
+
+
+    #[Route("/editRecipe/{id}", name: "editRecipe")]
+    public function editRecipe(Request $request, EntityManagerInterface $doctrine, $id) {
+        
+        // tell doctrine to get a specific repo/table
+        $repo = $doctrine->getRepository(Recipe::class);
+        // now make the query
+        $recipe = $repo->find($id);
+        
+        // form we want to use
+        $form = $this->createForm(recipeFormType::class, $recipe);
+        $form->handleRequest($request);
+
+        // si han llegado los datos y el formulario es valido:
+        if ($form->isSubmitted() && $form->isValid()) {
+            // retrieve form data
+            $recipe = $form->getData(); // getData() returns an object with all the fields. Coming from file "RecipeFormType, function configureOptions
+            $doctrine->persist($recipe);
+            $doctrine->flush();
+            
+            $this ->addFlash("success", "receta insertada correctamente");
+
+            // after adding new recipe redirect to:
+            return $this->redirectToRoute("listaRecipe");
 
         }
 
         return $this->render("Recipes/addRecipe.html.twig", ["recipeForm"->$form]);
+    }
+
+    #[Route("/remove/{id)", name:"removeRecipe")]
+    public function deleteRecipe(Request $request, EntityManagerInterface $doctrine, $id) {
+        // tell doctrine to get a specific repo/table
+        $repo = $doctrine->getRepository(Recipe::class);
+        // now make the query
+        $recipe = $repo->find($id);
+        $doctrine->remove($recipe);
+        $doctrine->flush();
+
+        $this ->addFlash("success", "receta borrada correctamente");
+
+        // after adding new recipe redirect to:
+        return $this->redirectToRoute("listaRecipe");
+
+
     }
 }

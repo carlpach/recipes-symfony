@@ -15,7 +15,9 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ recipe.name }}</h5>
                         <p class="card-text">{{ recipe.code }}</p>
-                        <a href="{{ path("getRecipe", {"id":recipe.id}) }}" class="btn btn-primary">Más Info</a> {# atention to syntaxis #}
+                        <a href="{{ path("getRecipe", {"id":recipe.id}) }}" class="btn btn-primary">More Info</a> {# attention to syntaxis #}
+                        <a href="{{ path("editRecipe", {"id":recipe.id}) }}" class="btn btn-primary">Edit</a> {# attention to syntaxis #}
+                        <a href="{{ path("deleteRecipe", {"id":recipe.id}) }}" class="btn btn-primary">Delete</a> {# attention to syntaxis #}
                     </div>
                 </div>
             </div>
